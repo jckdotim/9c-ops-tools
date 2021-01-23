@@ -7,7 +7,6 @@ headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
 }
-ADDRESS_8 = '0x0000000000000000000000000000000000000008'
 core_addr = lambda n: f'0x{n:0>40x}'
 
 def get_state(address):
