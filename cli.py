@@ -1,31 +1,12 @@
-import bencodex
-import requests
-import click
-
-
-headers = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-}
-ADDRESS_8 = '0x0000000000000000000000000000000000000008'
-core_addr = lambda n: f'0x{n:0>40x}'
-
-def get_state(address):
-    data = {"query": f"query{{ state(address: \"{address}\") }}"}
-    response = requests.post(
-        'http://localhost:23061/graphql', headers=headers, json=data
-    )
-    try:
-        return bencodex.loads(
-            bytes.fromhex(response.json()['data']['state'])
-        )
-    except TypeError:
-        return {}
+from common import (core_addr,
+                    get_state,
+                    get_characters_block)
 
 
 @click.group()
 def cli():
     pass
+
 
 @cli.command()
 @click.argument('address')
@@ -37,6 +18,14 @@ def activated(address):
         in get_state(core_addr(8))['accounts']
     ]
     click.echo(address.lower() in activated_accs)
+
+
+@cli.command()
+@click.argument('address')
+def inspect(address):
+    """Inspect given address characters"""
+    pprint.pprint(get_characters_block(address))
+
 
 if __name__ == '__main__':
     cli()
