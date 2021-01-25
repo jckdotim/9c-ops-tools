@@ -1,9 +1,7 @@
-import pprint
 import math
 
 import bencodex
 import requests
-import click
 
 
 headers = {
@@ -61,7 +59,7 @@ def get_characters_block(address):
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": f"*🆔: * `{address}`\n*:coin:: * {ncg} NCG"
+                    "text": f"*🆔: * `{address}`\n*💰: * {ncg} NCG"
                 }
             }
         ]
@@ -83,7 +81,7 @@ def get_characters_block(address):
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": f"⭐ {'🟨'*math.ceil((character['actionPoint']/120)*5)}{'⬜'*(5-math.ceil((character['actionPoint']/120)*5))} {character['actionPoint']} / 120 \n🎁 {'🟪'*math.ceil((prosperity_meter/1700)*5)}{'⬜'*(5-math.ceil((prosperity_meter/1700)*5))} {prosperity_meter} / 1700\n"
+                                "text": f"⭐ {':black_large_square:'*math.ceil((character['actionPoint']/120)*5)}{':white_large_square:'*(5-math.ceil((character['actionPoint']/120)*5))} {character['actionPoint']} / 120 \n🎁 {':black_large_square:'*math.ceil((prosperity_meter/1700)*5)}{':white_large_square:'*(5-math.ceil((prosperity_meter/1700)*5))} {prosperity_meter} / 1700\n"
 			}
 		})
     return result

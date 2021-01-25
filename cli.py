@@ -1,3 +1,6 @@
+import click
+import pprint
+
 from common import (core_addr,
                     get_state,
                     get_characters_block)
